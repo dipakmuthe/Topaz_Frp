@@ -16,6 +16,24 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // --- Responsive image loading defaults ---
+    document.querySelectorAll('img').forEach(function (img) {
+        const isPriorityAsset = img.closest('.navbar-brand-custom, .hero-fullscreen, .page-header-custom') || img.id === 'logo';
+        if (!img.hasAttribute('loading') && !isPriorityAsset) {
+            img.setAttribute('loading', 'lazy');
+        }
+        if (!img.hasAttribute('decoding')) {
+            img.setAttribute('decoding', 'async');
+        }
+    });
+
+    // --- Smooth section reveal defaults across all pages ---
+    document.querySelectorAll('main > section, body > section, footer.footer-custom').forEach(function (section) {
+        if (!section.classList.contains('reveal-on-scroll')) {
+            section.classList.add('reveal-on-scroll');
+        }
+    });
+
     // --- Intersection Observer for Scroll Reveals & Animations ---
     const revealElements = document.querySelectorAll('.reveal-on-scroll, .animate-fade-up, .animate-fade-in, .animate-zoom-in, .animate-slide-left, .animate-slide-right');
     if ('IntersectionObserver' in window && revealElements.length > 0) {
@@ -92,6 +110,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 e.preventDefault();
                 megaMenu.classList.toggle('show');
             }
+        });
+    }
+
+    // Close mobile menu after choosing a normal navigation link.
+    const navbarCollapse = document.getElementById('navbarContent');
+    if (navbarCollapse && window.bootstrap) {
+        navbarCollapse.querySelectorAll('a.nav-link:not(.dropdown-toggle), .nav-item .btn').forEach(function (link) {
+            link.addEventListener('click', function () {
+                if (window.innerWidth < 992 && navbarCollapse.classList.contains('show')) {
+                    window.bootstrap.Collapse.getOrCreateInstance(navbarCollapse).hide();
+                }
+            });
         });
     }
 
@@ -257,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (canvas) {
         const ctx = canvas.getContext('2d');
         let particles = [];
-        const maxParticles = 50;
+        const maxParticles = 65; // Slightly increased for a richer field
 
         const resizeCanvas = () => {
             canvas.width = canvas.parentElement.clientWidth;
@@ -269,11 +299,13 @@ document.addEventListener('DOMContentLoaded', function () {
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height + canvas.height;
-                this.size = Math.random() * 3 + 1;
-                this.speedY = -(Math.random() * 1.5 + 0.5);
-                this.speedX = Math.random() * 1 - 0.5;
-                this.alpha = Math.random() * 0.5 + 0.2;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2.2 + 0.8;
+                this.speedY = -(Math.random() * 0.8 + 0.3);
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.alpha = Math.random() * 0.45 + 0.15;
+                // Mixed colors: 65% Orange, 35% White/Glow
+                this.color = Math.random() > 0.35 ? '#F26A21' : '#FFFFFF';
             }
             update() {
                 this.y += this.speedY;
@@ -286,7 +318,14 @@ document.addEventListener('DOMContentLoaded', function () {
             draw() {
                 ctx.save();
                 ctx.globalAlpha = this.alpha;
-                ctx.fillStyle = '#F26A21'; // industrial orange ember
+                ctx.fillStyle = this.color;
+                if (this.color === '#FFFFFF') {
+                    ctx.shadowBlur = 5;
+                    ctx.shadowColor = '#FFFFFF';
+                } else {
+                    ctx.shadowBlur = 3;
+                    ctx.shadowColor = '#F26A21';
+                }
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -332,20 +371,100 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // --- Parallax Floating Product Image (Homepage Hero) ---
-    const floatProductWrapper = document.querySelector('.floating-product-wrapper');
-    const floatImg = document.querySelector('.floating-product-img');
-    if (floatProductWrapper && floatImg) {
-        floatProductWrapper.addEventListener('mousemove', function (e) {
-            const rect = floatProductWrapper.getBoundingClientRect();
+    // --- Redesigned Homepage Hero Typewriter, Counter, Parallax, and Scroll Click ---
+    
+    // 1. Typewriter Animation for "Trusted Worldwide."
+    const typewriterElement = document.getElementById('typewriter-text');
+    if (typewriterElement) {
+        const textToType = "Trusted Worldwide.";
+        let charIdx = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
+        let deletingSpeed = 60;
+        let pauseEnd = 3000; // Pause when full text is shown
+        let pauseStart = 500; // Pause when fully deleted
+
+        function type() {
+            if (!isDeleting) {
+                charIdx++;
+                typewriterElement.textContent = textToType.substring(0, charIdx);
+                if (charIdx === textToType.length) {
+                    isDeleting = true;
+                    setTimeout(type, pauseEnd);
+                } else {
+                    setTimeout(type, typingSpeed);
+                }
+            } else {
+                charIdx--;
+                typewriterElement.textContent = textToType.substring(0, charIdx);
+                if (charIdx === 0) {
+                    isDeleting = false;
+                    setTimeout(type, pauseStart);
+                } else {
+                    setTimeout(type, deletingSpeed);
+                }
+            }
+        }
+        setTimeout(type, 500);
+    }
+
+    // 2. Immediate Hero Counters
+    const heroCounters = document.querySelectorAll('.hero-counter');
+    if (heroCounters.length > 0) {
+        heroCounters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target'), 10);
+            const duration = 2000;
+            let current = 0;
+            const stepTime = Math.max(Math.floor(duration / target), 15);
+            const increment = Math.ceil(target / (duration / stepTime));
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    counter.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    counter.textContent = current;
+                }
+            }, stepTime);
+        });
+    }
+
+    // 3. Single Product Showcase Mouse Parallax
+    const showcase = document.getElementById('single-product-showcase');
+    const productImg = showcase ? showcase.querySelector('.hero-product-image') : null;
+    if (showcase && productImg) {
+        showcase.addEventListener('mousemove', function (e) {
+            const rect = showcase.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
-
-            floatImg.style.transform = `translate(${x * 0.05}px, ${y * 0.05}px) rotate(${x * 0.01}deg)`;
+            
+            // Calculate 3D tilt angles
+            const tiltX = (y / (rect.height / 2)) * -12; // Max 12 degrees tilt
+            const tiltY = (x / (rect.width / 2)) * 12;
+            
+            // Parallax shift offsets
+            const shiftX = x * 0.12;
+            const shiftY = y * 0.12;
+            
+            // Apply tilt and translation styles
+            productImg.style.transform = `translate3d(${shiftX}px, ${shiftY}px, 30px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.05)`;
         });
+        
+        showcase.addEventListener('mouseleave', function () {
+            // Reset smoothly back to baseline float position
+            productImg.style.transform = '';
+        });
+    }
 
-        floatProductWrapper.addEventListener('mouseleave', function () {
-            floatImg.style.transform = 'translateY(0) rotate(0deg)';
+    // 4. Scroll Indicator Click Action
+    const scrollIndicator = document.querySelector('.hero-scroll-indicator');
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', function () {
+            const nextSection = document.getElementById('about-us-summary');
+            if (nextSection) {
+                nextSection.scrollIntoView({ behavior: 'smooth' });
+            }
         });
     }
 
@@ -444,33 +563,56 @@ document.addEventListener('DOMContentLoaded', function () {
     const mapTooltip = document.getElementById('map-tooltip');
 
     if (pins.length > 0 && mapTooltip) {
+        const hideMapTooltip = function () {
+            mapTooltip.classList.remove('active');
+        };
+
+        const showMapTooltip = function (pin) {
+            const country = pin.getAttribute('data-country');
+            const products = pin.getAttribute('data-products');
+            const region = pin.getAttribute('data-region');
+            const ports = pin.getAttribute('data-ports');
+
+            document.getElementById('tooltip-country').textContent = country;
+            document.getElementById('tooltip-region').textContent = region;
+            document.getElementById('tooltip-products').textContent = products;
+            document.getElementById('tooltip-ports').textContent = ports;
+
+            mapTooltip.classList.add('active');
+        };
+
         pins.forEach(pin => {
             pin.addEventListener('mouseenter', function (e) {
-                const country = pin.getAttribute('data-country');
-                const products = pin.getAttribute('data-products');
-                const region = pin.getAttribute('data-region');
-                const ports = pin.getAttribute('data-ports');
-
-                document.getElementById('tooltip-country').textContent = country;
-                document.getElementById('tooltip-region').textContent = region;
-                document.getElementById('tooltip-products').textContent = products;
-                document.getElementById('tooltip-ports').textContent = ports;
-
-                mapTooltip.classList.add('active');
+                showMapTooltip(pin);
             });
 
             pin.addEventListener('mousemove', function (e) {
-                const parentRect = pin.parentElement.getBoundingClientRect();
-                const mouseX = e.clientX - parentRect.left;
-                const mouseY = e.clientY - parentRect.top;
+                const wrapper = pin.closest('.svg-worldmap-wrapper');
+                const wrapperRect = wrapper.getBoundingClientRect();
+                const mouseX = e.clientX - wrapperRect.left;
+                const mouseY = e.clientY - wrapperRect.top;
 
                 mapTooltip.style.left = `${mouseX + 15}px`;
                 mapTooltip.style.top = `${mouseY - 30}px`;
             });
 
             pin.addEventListener('mouseleave', function () {
-                mapTooltip.classList.remove('active');
+                hideMapTooltip();
             });
+
+            pin.addEventListener('click', function (e) {
+                if (window.innerWidth < 768) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    showMapTooltip(pin);
+                }
+            });
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.map-hotspot-pin, .map-tooltip-card')) {
+                hideMapTooltip();
+            }
         });
     }
 
