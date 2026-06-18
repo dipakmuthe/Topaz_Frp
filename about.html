@@ -188,16 +188,22 @@
     </header>
 
     <!-- --- SECTION: VISION & MISSION CARDS --- -->
-    <section class="section-padding bg-light-pattern position-relative overflow-hidden reveal-on-scroll" id="vision-mission">
+    <section class="section-padding bg-light-pattern position-relative overflow-hidden no-gsap-scroll" id="vision-mission">
         <!-- Background decoration blobs -->
         <div class="bg-decor-blob blob-primary" style="top: 10%; left: -100px;"></div>
         <div class="bg-decor-blob blob-red" style="bottom: 10%; right: -100px;"></div>
         
         <div class="container position-relative" style="z-index: 2;">
-            <div class="row g-4 mb-5 vision-mission-grid-row">
+            <div class="section-heading text-center mb-5">
+                <span class="text-uppercase text-primary fw-bold letter-spacing-1 d-block mb-2">Corporate Purpose</span>
+                <h2 class="section-title">Our Vision & Mission</h2>
+                <p class="section-subtitle">Driving structural innovation and safety engineering forward with clear goals and unwavering values.</p>
+            </div>
+
+            <div class="row g-4 mb-5 vision-mission-grid-row" style="perspective: 1000px;">
                 <!-- Vision Card -->
                 <div class="col-lg-6 mb-4 mb-lg-0">
-                    <div class="vision-mission-card vision-card animate-slide-left h-100">
+                    <div class="vision-mission-card vision-card h-100">
                         <div class="card-accent-glow"></div>
                         <div class="card-content-wrap">
                             <div class="d-flex align-items-center gap-3 mb-4 position-relative" style="z-index: 2;">
@@ -206,11 +212,11 @@
                                 </div>
                                 <div>
                                     <span class="text-uppercase text-primary fw-bold letter-spacing-1 d-block mb-1" style="font-size: 0.8rem; letter-spacing: 1px;">Target Goal</span>
-                                    <h3 class="h4 fw-bold text-white mb-0" style="font-family: var(--font-heading);">Our Vision</h3>
+                                    <h3 class="h4 fw-bold text-dark mb-0" style="font-family: var(--font-heading);">Our Vision</h3>
                                 </div>
                             </div>
-                            <h4 class="h5 text-white mb-3" style="font-family: var(--font-heading); font-weight: 600; line-height: 1.4;">Pioneering Global Composite Excellence</h4>
-                            <p class="text-white-50 mb-0" style="line-height: 1.6;">
+                            <h4 class="h5 text-dark mb-3" style="font-family: var(--font-heading); font-weight: 600; line-height: 1.4;">Pioneering Global Composite Excellence</h4>
+                            <p class="text-slate-light mb-0" style="line-height: 1.6;">
                                 To be a global leader in innovative, high-strength composite systems and FRP building materials. We drive sustainable engineering, securing municipal and industrial utility grids worldwide with precision-designed, corrosion-immune structural safety assets.
                             </p>
                             <div class="card-tags-list mt-4 d-flex flex-wrap gap-2">
@@ -224,7 +230,7 @@
                 
                 <!-- Mission Card -->
                 <div class="col-lg-6">
-                    <div class="vision-mission-card mission-card animate-slide-right h-100">
+                    <div class="vision-mission-card mission-card h-100">
                         <div class="card-accent-glow"></div>
                         <div class="card-content-wrap">
                             <div class="d-flex align-items-center gap-3 mb-4 position-relative" style="z-index: 2;">
@@ -232,18 +238,18 @@
                                     <i class="fas fa-bullseye"></i>
                                 </div>
                                 <div>
-                                    <span class="text-uppercase fw-bold letter-spacing-1 d-block mb-1" style="font-size: 0.8rem; letter-spacing: 1px; color: #ff5252 !important;">Mission Objective</span>
-                                    <h3 class="h4 fw-bold text-white mb-0" style="font-family: var(--font-heading);">Our Mission</h3>
+                                    <span class="text-uppercase text-primary fw-bold letter-spacing-1 d-block mb-1" style="font-size: 0.8rem; letter-spacing: 1px;">Mission Objective</span>
+                                    <h3 class="h4 fw-bold text-dark mb-0" style="font-family: var(--font-heading);">Our Mission</h3>
                                 </div>
                             </div>
-                            <h4 class="h5 text-white mb-3" style="font-family: var(--font-heading); font-weight: 600; line-height: 1.4;">Commitment to Quality & Reliability</h4>
-                            <p class="text-white-50 mb-0" style="line-height: 1.6;">
+                            <h4 class="h5 text-dark mb-3" style="font-family: var(--font-heading); font-weight: 600; line-height: 1.4;">Commitment to Quality & Reliability</h4>
+                            <p class="text-slate-light mb-0" style="line-height: 1.6;">
                                 To engineer standard composite solutions that exceed client expectations in quality and utility. We pursue zero-defect manufacturing pathways, combining eco-friendly polymer resins, strict BS EN 124 protocols, and responsive custom molding services.
                             </p>
                             <div class="card-tags-list mt-4 d-flex flex-wrap gap-2">
-                                <span class="tag-item"><i class="fas fa-check-circle me-1" style="color: #ff5252;"></i>Zero-Defect</span>
-                                <span class="tag-item"><i class="fas fa-microscope me-1" style="color: #ff5252;"></i>Lab Inspected</span>
-                                <span class="tag-item"><i class="fas fa-shipping-fast me-1" style="color: #ff5252;"></i>Fast Delivery</span>
+                                <span class="tag-item"><i class="fas fa-check-circle me-1 text-dark"></i>Zero-Defect</span>
+                                <span class="tag-item"><i class="fas fa-microscope me-1 text-dark"></i>Lab Inspected</span>
+                                <span class="tag-item"><i class="fas fa-shipping-fast me-1 text-dark"></i>Fast Delivery</span>
                             </div>
                         </div>
                     </div>
@@ -426,7 +432,7 @@
                 <div class="col-lg-5 mb-5 mb-lg-0">
                     <div class="reveal-mask-wrapper" style="max-width: 80%; margin: 0 auto;">
                         <div class="reveal-mask-block"></div>
-                        <img src="assets/images/manhole-cover-dia600-installation.jpg" alt="FRP Molding Factory" class="reveal-mask-img">
+                        <img src="assets/images/compression-molding.png" alt="Advanced Compression Molding Press" class="reveal-mask-img">
                     </div>
                 </div>
 

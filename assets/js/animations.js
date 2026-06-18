@@ -30,6 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
             // Bypassing preloader: hide loader instantly
             document.body.classList.remove("loading");
             loader.style.display = "none";
+            
+            // Instantly reveal hero showcase if present
+            if (document.querySelector(".hero-right-showcase")) {
+                gsap.set(".hero-right-showcase", { opacity: 1, scale: 1, rotationY: 0, rotationX: 0, y: 0 });
+            }
+
             // Refresh ScrollTrigger to ensure triggers align correctly
             if (window.ScrollTrigger) {
                 ScrollTrigger.refresh();
@@ -138,6 +144,25 @@ document.addEventListener("DOMContentLoaded", () => {
                             duration: 0.5,
                             ease: "power2.out"
                         }, "-=0.2");
+
+                        // Smoothly animate in the hero image showcase on first load
+                        if (document.querySelector(".hero-right-showcase")) {
+                            outro.fromTo(".hero-right-showcase", {
+                                opacity: 0,
+                                scale: 0.75,
+                                rotationY: -35,
+                                rotationX: 12,
+                                y: 50
+                            }, {
+                                opacity: 1,
+                                scale: 1,
+                                rotationY: 0,
+                                rotationX: 0,
+                                y: 0,
+                                duration: 1.25,
+                                ease: "power4.out"
+                            }, "-=0.35");
+                        }
                     }
                 });
             }
@@ -230,6 +255,57 @@ document.addEventListener("DOMContentLoaded", () => {
             stagger: 0.06,
             ease: "power2.out"
         }, "-=0.45");
+    }
+
+    // --- Vision & Mission Cards GSAP ScrollTrigger 3D Entry Animation ---
+    const visionMissionSection = document.getElementById("vision-mission");
+    if (visionMissionSection) {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const visionCard = visionMissionSection.querySelector(".vision-card");
+        const missionCard = visionMissionSection.querySelector(".mission-card");
+        const headingPre = visionMissionSection.querySelector(".section-heading > span");
+        const headingTitle = visionMissionSection.querySelector(".section-heading > h2");
+        const headingSub = visionMissionSection.querySelector(".section-heading > p");
+
+        // Set initial 3D states
+        gsap.set([headingPre, headingTitle, headingSub], { opacity: 0, y: 30 });
+        gsap.set(visionCard, { 
+            opacity: 0, 
+            x: -80, 
+            rotationY: -20,
+            transformOrigin: "right center"
+        });
+        gsap.set(missionCard, { 
+            opacity: 0, 
+            x: 80, 
+            rotationY: 20,
+            transformOrigin: "left center"
+        });
+
+        const vTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: visionMissionSection,
+                start: "top 75%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        vTl.to([headingPre, headingTitle, headingSub], {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power3.out"
+        })
+        .to([visionCard, missionCard], {
+            opacity: 1,
+            x: 0,
+            rotationY: 0,
+            duration: 1.25,
+            stagger: 0.2,
+            ease: "power4.out"
+        }, "-=0.4");
     }
 
     // --- Centralized Section Scroll Animations (In & Out) ---
