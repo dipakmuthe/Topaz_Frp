@@ -29,13 +29,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- Smooth section reveal defaults across all pages ---
     document.querySelectorAll('main > section, body > section, footer.footer-custom').forEach(function (section) {
+        if (section.id === 'why-choose-us' || section.classList.contains('no-gsap-scroll')) {
+            return;
+        }
         if (!section.classList.contains('reveal-on-scroll')) {
             section.classList.add('reveal-on-scroll');
         }
     });
 
     // --- Intersection Observer for Scroll Reveals & Animations ---
-    const revealElements = document.querySelectorAll('.reveal-on-scroll, .animate-fade-up, .animate-fade-in, .animate-zoom-in, .animate-slide-left, .animate-slide-right');
+    let revealElements = document.querySelectorAll('.reveal-on-scroll, .animate-fade-up, .animate-fade-in, .animate-zoom-in, .animate-slide-left, .animate-slide-right');
+    
+    if (window.gsap && window.ScrollTrigger) {
+        revealElements = Array.from(revealElements).filter(function (elem) {
+            // Exclude main sections and footer which will be animated via GSAP
+            return !elem.matches('main > section, body > section, footer.footer-custom');
+        });
+    }
+
     if ('IntersectionObserver' in window && revealElements.length > 0) {
         const revealObserver = new IntersectionObserver(function (entries, observer) {
             entries.forEach(function (entry) {

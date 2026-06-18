@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Explore TOPAZ FRP's dynamic product gallery. Real-world images of our certified, high-strength composite manhole covers, gratings, and custom FRP systems.">
+    <title>Product Gallery | TOPAZ FRP - Heavy Duty Infrastructure Composites</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <!-- Animations CSS -->
+    <link href="assets/css/animations.css" rel="stylesheet">
+</head>
+
+
+<body class="loading">
+    <!-- --- Page Loader --- -->
+    <div id="web-loader" class="web-loader">
+        <div class="loader-inner">
+            <div class="loader-logo-container">
+                <svg class="loader-svg" viewBox="0 0 100 100">
+                    <circle class="loader-circle-bg" cx="50" cy="50" r="45"></circle>
+                    <circle class="loader-circle-progress" cx="50" cy="50" r="45"></circle>
+                </svg>
+                <div class="loader-logo-wrap">
+                    <img src="assets/images/logo.png" alt="TOPAZ Logo" class="loader-logo">
+                </div>
+            </div>
+            <div class="loader-percentage">0%</div>
+            <div class="loader-status">TOPAZ FRP</div>
+        </div>
+    </div>
+    
+    <!-- --- Top bar --- -->
+    <div class="header-top d-none d-lg-block">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-7">
+                    <span class="me-3"><i class="fas fa-map-marker-alt text-primary me-2"></i>Lotus Court, Pune -
+                        411009, Maharashtra, India</span>
+                    <span><i class="fas fa-clock text-primary me-2"></i>Mon - Sat: 9:00 AM - 6:00 PM</span>
+                </div>
+                <div class="col-md-5 text-end">
+                    <a href="tel:+919422012188" class="me-3"><i class="fas fa-phone text-primary me-2"></i>+91
+                        9422012188</a>
+                    <a href="mailto:sales@topazfrp.com"><i
+                            class="fas fa-envelope text-primary me-2"></i>sales@topazfrp.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- --- Navbar --- -->
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top" id="main-nav">
+        <div class="container">
+            <a class="navbar-brand navbar-brand-custom" href="index.html">
+                <img src="assets/images/logo.png" alt="TOPAZ FRP Logo" id="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+
+                    <!-- Mega Dropdown Menu -->
+                    <li class="nav-item dropdown dropdown-mega">
+                        <a class="nav-link dropdown-toggle" href="products.html" role="button" aria-expanded="false">
+                            Products
+                        </a>
+                        <div class="dropdown-menu dropdown-mega-menu">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                                        <div class="mega-menu-title"><i
+                                                class="fas fa-circle-notch text-primary me-2"></i>Manhole Covers</div>
+                                        <ul class="mega-menu-list">
+                                            <li><a href="products/square-manhole-covers.html"><i
+                                                        class="fas fa-chevron-right"></i>Square Covers</a></li>
+                                            <li><a href="products/rectangle-manhole-covers.html"><i
+                                                        class="fas fa-chevron-right"></i>Rectangle Covers</a></li>
+                                            <li><a href="products/circular-manhole-covers.html"><i
+                                                        class="fas fa-chevron-right"></i>Circular Covers</a></li>
+                                        </ul>
+                                        <div class="mega-menu-title mt-4"><i
+                                                class="fas fa-fill-drip text-primary me-2"></i>Recess Covers</div>
+                                        <ul class="mega-menu-list">
+                                            <li><a href="products/recess-covers.html"><i
+                                                        class="fas fa-chevron-right"></i>FRP
+                                                     Recess Covers</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                                        <div class="mega-menu-title"><i
+                                                class="fas fa-database text-primary me-2"></i>Tank Covers</div>
+                                        <ul class="mega-menu-list">
+                                            <li><a href="products/overhead-tank-covers.html"><i
+                                                        class="fas fa-chevron-right"></i>Overhead Tank Covers</a></li>
+                                            <li><a href="products/underground-tank-covers.html"><i
+                                                        class="fas fa-chevron-right"></i>Underground Tank Covers</a>
+                                            </li>
+                                        </ul>
+                                        <div class="mega-menu-title mt-4"><i
+                                                class="fas fa-leaf text-primary me-2"></i>Planters & Pergolas</div>
+                                        <ul class="mega-menu-list">
+                                            <li><a href="products/designer-planters.html"><i
+                                                        class="fas fa-chevron-right"></i>FRP
+                                                     Designer Planters</a></li>
+                                            <li><a href="products/pergolas.html"><i
+                                                        class="fas fa-chevron-right"></i>FRP Pergolas</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                                        <div class="mega-menu-title"><i
+                                                class="fas fa-bars text-primary me-2"></i>Gratings</div>
+                                        <ul class="mega-menu-list">
+                                            <li><a href="products/gully-gratings.html"><i
+                                                        class="fas fa-chevron-right"></i>FRP
+                                                     Gratings</a></li>
+                                            <li><a href="products/water-gully-covers.html"><i
+                                                        class="fas fa-chevron-right"></i>Water Gully Covers</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="mega-menu-title"><i
+                                                class="fas fa-border-all text-primary me-2"></i>Moulded Gratings</div>
+                                        <ul class="mega-menu-list">
+                                            <li><a href="products/chequered-gratings.html"><i
+                                                        class="fas fa-chevron-right"></i>FRP
+                                                     Chequered Gratings</a></li>
+                                            <li><a href="products/stair-treads.html"><i
+                                                        class="fas fa-chevron-right"></i>FRP Stair Treads</a></li>
+                                        </ul>
+                                        <div class="mega-menu-title mt-4"><i
+                                                class="fas fa-cogs text-primary me-2"></i>Custom Products</div>
+                                        <ul class="mega-menu-list">
+                                            <li><a href="products/custom-covers.html"><i
+                                                        class="fas fa-chevron-right"></i>Custom FRP Covers</a></li>
+                                            <li><a href="products/window-shades-doors.html"><i
+                                                        class="fas fa-chevron-right"></i>Window Shades & Doors</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="testing.html">Testing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="exports.html">Exports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="certifications.html">Certifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- --- Page Header --- -->
+    <header class="page-header-custom animate-fade-in"
+        style="background-image: url('assets/images/products-hero-bg.png'); min-height: 55vh; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 0 !important;">
+        <canvas id="gallery-particle-canvas" class="about-particles"></canvas>
+        <div class="container text-center" style="position: relative; z-index: 2;">
+            <div class="d-flex justify-content-center mb-3 animate-fade-up delay-100">
+                <span class="hero-badge"
+                    style="background-color: rgba(242, 106, 33, 0.15); color: var(--primary); border: 1px solid rgba(242, 106, 33, 0.3); padding: 8px 16px; border-radius: 50px; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1.5px; display: inline-block;">Visual
+                    Showcase</span>
+            </div>
+            <h1 class="display-3 font-heading fw-bold mb-3 text-white reveal-text-anim"
+                style="text-shadow: 0 4px 15px rgba(0,0,0,0.6); font-family: var(--font-heading);">
+                <span>Product Gallery</span>
+            </h1>
+            <p class="lead text-white-50 max-width-600 mx-auto animate-fade-up delay-200"
+                style="text-shadow: 0 2px 8px rgba(0,0,0,0.5); font-weight: 500;">
+                A real-world engineering portfolio of finished FRP composite installations, compression molds, and structural strength testing configurations.
+            </p>
+        </div>
+    </header>
+
+    <!-- --- Gallery Section --- -->
+    <section class="section-padding bg-light-pattern position-relative overflow-hidden">
+        <div class="container">
+            <!-- Filter Controls -->
+            <div class="gallery-filter-container text-center">
+                <button class="btn-filter active" data-filter="all"><i class="fas fa-border-all me-2"></i>All Media</button>
+                <button class="btn-filter" data-filter="image"><i class="fas fa-image me-2"></i>Images</button>
+                <button class="btn-filter" data-filter="video"><i class="fas fa-play-circle me-2"></i>Videos</button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div id="gallery-grid" class="gallery-grid">
+                <!-- Dynamically rendered media cards will be appended here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- --- Lightbox Modal --- -->
+    <div class="modal fade lightbox-modal" id="galleryLightboxModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"
+                    style="position: absolute; right: 15px; top: 15px; z-index: 11;"></button>
+                <div class="modal-body p-0">
+                    <div class="position-relative">
+                        <!-- Navigation controls -->
+                        <button class="lightbox-btn-prev" id="lightbox-prev"><i class="fas fa-chevron-left"></i></button>
+                        <button class="lightbox-btn-next" id="lightbox-next"><i class="fas fa-chevron-right"></i></button>
+
+                        <!-- Media Container -->
+                        <div id="lightbox-media-container">
+                            <!-- Image or Video tag will be loaded dynamically -->
+                        </div>
+
+                        <!-- Caption -->
+                        <div class="lightbox-caption" id="lightbox-caption">Product Specimen</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- --- Restored Professional Footer --- -->
+    <footer class="footer-custom text-white-50"
+        style="background-color: var(--dark); border-top: 4px solid var(--primary); padding: 60px 0 30px 0;">
+        <div class="container">
+            <div class="row g-4 mb-4 text-start">
+                <!-- Column 1: Logo & Info -->
+                <div class="col-lg-3 col-md-6">
+                    <img src="assets/images/logo.png" alt="TOPAZ FRP Logo" class="bg-white p-2 rounded mb-3"
+                        style="height: 55px; max-width: 100%;">
+                    <p class="small text-white-50 mt-2">
+                        TOPAZ FRP is an industry-pioneering manufacturer of high-strength, durable, and EN 124 compliant
+                        composite FRP manhole covers, gratings, and custom utility infrastructure solutions since 1986.
+                    </p>
+                    <div class="footer-socials mt-3">
+                        <a href="#" class="footer-social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="footer-social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="footer-social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="footer-title text-white fw-bold mb-4">Quick Links</h5>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="index.html" class="text-white-50 text-decoration-none"><i
+                                    class="fas fa-chevron-right me-2 text-primary small"></i>Home</a></li>
+                        <li><a href="about.html" class="text-white-50 text-decoration-none"><i
+                                    class="fas fa-chevron-right me-2 text-primary small"></i>About Us</a></li>
+                        <li><a href="products.html" class="text-white-50 text-decoration-none"><i
+                                    class="fas fa-chevron-right me-2 text-primary small"></i>Products</a></li>
+                        <li><a href="testing.html" class="text-white-50 text-decoration-none"><i
+                                    class="fas fa-chevron-right me-2 text-primary small"></i>Testing</a></li>
+                        <li><a href="exports.html" class="text-white-50 text-decoration-none"><i
+                                    class="fas fa-chevron-right me-2 text-primary small"></i>Exports</a></li>
+                        <li><a href="certifications.html" class="text-white-50 text-decoration-none"><i
+                                    class="fas fa-chevron-right me-2 text-primary small"></i>Certifications</a></li>
+                        <li><a href="contact.html" class="text-white-50 text-decoration-none"><i
+                                    class="fas fa-chevron-right me-2 text-primary small"></i>Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Products -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="footer-title text-white fw-bold mb-4">Our Products</h5>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="manhole-covers.html" class="text-white-50 text-decoration-none"><i
+                                    class="fas fa-chevron-right me-2 text-primary small"></i>Manhole Covers</a></li>
+                        <li><a href="tank-covers.html" class="text-white-50 text-decoration-none"><i
+                                    class="fas fa-chevron-right me-2 text-primary small"></i>Tank Covers</a></li>
+                        <li><a href="products/gully-gratings.html" class="text-white-50 text-decoration-none"><i
+                                    class="fas fa-chevron-right me-2 text-primary small"></i>FRP Gratings</a></li>
+                        <li><a href="products/chequered-gratings.html" class="text-white-50 text-decoration-none"><i
+                                    class="fas fa-chevron-right me-2 text-primary small"></i>Moulded Gratings</a></li>
+                        <li><a href="products/designer-planters.html" class="text-white-50 text-decoration-none"><i
+                                    class="fas fa-chevron-right me-2 text-primary small"></i>Planters & Pergolas</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact Info -->
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="footer-title text-white fw-bold mb-4">Contact Details</h5>
+                    <ul class="footer-links list-unstyled small text-white-50">
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="fas fa-map-marker-alt text-primary mt-1 me-3"></i>
+                            <span>
+                                <a href="https://maps.google.com/?q=Lotus+Court,+Pune+-+411009,+Maharashtra,+India"
+                                    target="_blank" class="text-white-50 text-decoration-none hover-white">
+                                    Lotus Court, Pune - 411009, Maharashtra, India
+                                </a>
+                            </span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="fas fa-phone-alt text-primary me-3"></i>
+                            <span>
+                                <a href="tel:+919422012188" class="text-white-50 text-decoration-none hover-white">
+                                    +91 9422012188
+                                </a>
+                            </span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-center">
+                            <i class="fas fa-envelope text-primary me-3"></i>
+                            <span>
+                                <a href="mailto:sales@topazfrp.com"
+                                    class="text-white-50 text-decoration-none hover-white">
+                                    sales@topazfrp.com
+                                </a>
+                            </span>
+                        </li>
+                        <li class="d-flex align-items-start">
+                            <i class="fas fa-clock text-primary mt-1 me-3"></i>
+                            <span>Mon - Sat: 9:00 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright bar -->
+            <div class="footer-bottom border-top border-secondary pt-4 text-center">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-md-6 text-md-start mb-3 mb-md-0">
+                        <p class="copyright-text mb-0 small text-white-50">
+                            &copy; 2026 TOPAZ FRP. All Rights Reserved. Compliant with international BS EN 124
+                            standards.
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p class="mb-0 small text-white-50">
+                            Developed By
+                            <a href="https://mindaxiss.com/" target="_blank" class="mindaxis-highlight"
+                                style="color: var(--primary); font-weight: 600; text-decoration: none;">
+                                MindAxis Innovation Pvt Ltd
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- GSAP & Core Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
+    
+    <!-- Custom scripts -->
+    <script src="assets/js/animations.js"></script>
+    <script src="assets/js/gallery-product-data.js"></script>
+    <script src="assets/js/gallery-page.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

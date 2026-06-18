@@ -1,0 +1,369 @@
+/* 
+   TOPAZ FRP - GSAP Preloader & Product Gallery Animations CSS
+*/
+
+/* --- Web Preloader Styles --- */
+.web-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--dark, #0B1635);
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loader-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    max-width: 360px;
+    padding: 20px;
+}
+
+.loader-logo-container {
+    position: relative;
+    width: 190px;
+    height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.loader-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.loader-circle-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.05);
+    stroke-width: 4px;
+}
+
+.loader-circle-progress {
+    fill: none;
+    stroke: var(--primary, #F26A21);
+    stroke-width: 4px;
+    stroke-linecap: round;
+    stroke-dasharray: 283;
+    stroke-dashoffset: 283;
+    transition: stroke-dashoffset 0.1s linear;
+}
+
+.loader-logo-wrap {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.loader-logo {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    transition: transform 0.35s ease;
+}
+
+.loader-percentage {
+    font-family: var(--font-heading, 'Outfit', sans-serif);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+    z-index: 2;
+}
+
+.loader-status {
+    font-family: var(--font-heading, 'Outfit', sans-serif);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--primary, #F26A21);
+    letter-spacing: 2.5px;
+    margin-top: 6px;
+    opacity: 0.95;
+    z-index: 2;
+}
+
+/* Initially hide body scrollbars when loading */
+body.loading {
+    overflow: hidden !important;
+}
+
+/* --- Gallery Styles --- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    width: 100%;
+}
+
+@media (max-width: 991px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 575px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.gallery-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color, #E2E8F0);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card, 0 10px 15px -3px rgb(0 0 0 / 0.04));
+    transition: var(--transition-smooth, all 0.35s ease);
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.gallery-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover, 0 20px 25px -5px rgb(0 0 0 / 0.08));
+    border-color: rgba(242, 106, 33, 0.3);
+}
+
+.gallery-media-wrap {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 260px; /* Fixed height for complete layout uniformity */
+    background-color: #F8FAFC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-img, .gallery-video {
+    width: 100%;
+    height: 100%; /* Force height to match parent */
+    display: block;
+    object-fit: cover; /* Crop to maintain layout ratio */
+    transition: var(--transition-smooth, all 0.35s ease);
+}
+
+.gallery-card:hover .gallery-img, .gallery-card:hover .gallery-video {
+    transform: scale(1.05);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(11, 22, 53, 0.6);
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth, all 0.35s ease);
+    z-index: 2;
+}
+
+.gallery-card:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-icon-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--primary, #F26A21);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 15px rgba(242, 106, 33, 0.4);
+    transform: scale(0.8);
+    transition: var(--transition-smooth, all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275));
+}
+
+.gallery-card:hover .gallery-icon-circle {
+    transform: scale(1);
+}
+
+.gallery-info {
+    padding: 16px 20px;
+    background: #ffffff;
+    border-top: 1px solid var(--border-color, #E2E8F0);
+}
+
+.gallery-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--dark, #0B1635);
+    margin-bottom: 4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.gallery-badge {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.gallery-badge-image {
+    background-color: var(--primary-light, #FFEFE6);
+    color: var(--primary, #F26A21);
+}
+
+.gallery-badge-video {
+    background-color: #E0F2FE;
+    color: #0284C7;
+}
+
+/* --- Filter Controls --- */
+.gallery-filter-container {
+    margin-bottom: 40px;
+}
+
+.btn-filter {
+    background-color: transparent;
+    border: 1px solid var(--border-color, #E2E8F0);
+    color: var(--slate-light, #64748B);
+    font-family: var(--font-heading, 'Outfit', sans-serif);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 8px 22px;
+    border-radius: 50px;
+    margin: 5px;
+    transition: var(--transition-smooth, all 0.35s ease);
+    outline: none;
+}
+
+.btn-filter:hover {
+    border-color: var(--primary, #F26A21);
+    color: var(--primary, #F26A21);
+}
+
+.btn-filter.active {
+    background-color: var(--primary, #F26A21);
+    border-color: var(--primary, #F26A21);
+    color: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(242, 106, 33, 0.3);
+}
+
+/* --- Lightbox Styles --- */
+.lightbox-modal .modal-content {
+    background-color: transparent;
+    border: none;
+}
+
+.lightbox-img-wrap, .lightbox-video-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.lightbox-img-wrap img {
+    max-width: 100%;
+    max-height: 75vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.lightbox-video-wrap video {
+    max-width: 100%;
+    max-height: 75vh;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.lightbox-btn-prev, .lightbox-btn-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(11, 22, 53, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-smooth, all 0.35s ease);
+    z-index: 10;
+    font-size: 1.3rem;
+}
+
+.lightbox-btn-prev:hover, .lightbox-btn-next:hover {
+    background: var(--primary, #F26A21);
+    border-color: var(--primary, #F26A21);
+    box-shadow: 0 0 15px rgba(242, 106, 33, 0.6);
+}
+
+.lightbox-btn-prev {
+    left: -70px;
+}
+
+.lightbox-btn-next {
+    right: -70px;
+}
+
+.lightbox-caption {
+    text-align: center;
+    color: #ffffff;
+    font-family: var(--font-heading, 'Outfit', sans-serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-top: 15px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 767px) {
+    .lightbox-btn-prev {
+        left: 10px;
+    }
+    .lightbox-btn-next {
+        right: 10px;
+    }
+}
+
+/* --- GSAP Scroll-Trigger Utility --- */
+.gsap-scroll-animate {
+    transition: none !important;
+    will-change: transform, opacity;
+}
