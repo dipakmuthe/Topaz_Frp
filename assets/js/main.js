@@ -124,15 +124,36 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Close mobile menu after choosing a normal navigation link.
+    // Toggle menu-open class on navbar and mobile-menu-active on body for backdrop overlays and scroll lock
+    const mainNav = document.getElementById('main-nav');
     const navbarCollapse = document.getElementById('navbarContent');
-    if (navbarCollapse && window.bootstrap) {
-        navbarCollapse.querySelectorAll('a.nav-link:not(.dropdown-toggle), .nav-item .btn').forEach(function (link) {
+    if (navbarCollapse && mainNav) {
+        navbarCollapse.addEventListener('show.bs.collapse', function () {
+            mainNav.classList.add('menu-open');
+            document.body.classList.add('mobile-menu-active');
+        });
+        navbarCollapse.addEventListener('hide.bs.collapse', function () {
+            mainNav.classList.remove('menu-open');
+            document.body.classList.remove('mobile-menu-active');
+        });
+
+        // Close mobile menu after choosing any navigation link (including mega menu nested links)
+        navbarCollapse.querySelectorAll('a:not(.dropdown-toggle), .nav-item .btn').forEach(function (link) {
             link.addEventListener('click', function () {
-                if (window.innerWidth < 992 && navbarCollapse.classList.contains('show')) {
+                if (window.innerWidth < 992 && navbarCollapse.classList.contains('show') && window.bootstrap) {
                     window.bootstrap.Collapse.getOrCreateInstance(navbarCollapse).hide();
                 }
             });
+        });
+
+        // Close mobile menu when clicking outside the navigation bar
+        document.addEventListener('click', function (e) {
+            if (window.innerWidth < 992 && navbarCollapse.classList.contains('show') && window.bootstrap) {
+                const clickInsideNavbar = mainNav.contains(e.target);
+                if (!clickInsideNavbar) {
+                    window.bootstrap.Collapse.getOrCreateInstance(navbarCollapse).hide();
+                }
+            }
         });
     }
 

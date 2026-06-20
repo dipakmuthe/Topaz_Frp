@@ -287,7 +287,11 @@ document.addEventListener("DOMContentLoaded", () => {
             scrollTrigger: {
                 trigger: visionMissionSection,
                 start: "top 75%",
-                toggleActions: "play none none none"
+                toggleActions: "play none none none",
+                onEnter: () => {
+                    visionMissionSection.classList.add("active");
+                    visionMissionSection.classList.add("animate-active");
+                }
             }
         });
 
@@ -308,16 +312,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }, "-=0.4");
     }
 
-    // --- Centralized Section Scroll Animations (In & Out) ---
+    // --- Centralized Section Scroll Animations (Reveal In Only) ---
     if (window.gsap && window.ScrollTrigger) {
         gsap.registerPlugin(ScrollTrigger);
 
         const sections = document.querySelectorAll("main > section, body > section, footer.footer-custom");
 
         sections.forEach((section) => {
-            // Exclude the preloader, sections with custom scroll triggers (Why Choose Us), or explicit bypasses
+            // Exclude the preloader, sections with custom scroll triggers (Why Choose Us, Vision & Mission), or explicit bypasses
             if (
                 section.id === "why-choose-us" || 
+                section.id === "vision-mission" ||
                 section.id === "web-loader" ||
                 section.closest("#web-loader") || 
                 section.classList.contains("no-gsap-scroll")
@@ -325,40 +330,29 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // Apply utility class to disable CSS transitions and set will-change
+            // Apply utility class
             section.classList.add("gsap-scroll-animate");
 
             // Set initial state: faded and shifted down
-            gsap.set(section, { opacity: 0, y: 50 });
+            gsap.set(section, { opacity: 0, y: 40 });
 
-            // Create ScrollTrigger for dual-directional in/out animations
+            // Reveal once when section enters viewport — no leave/leaveBack to avoid scroll sticking
             ScrollTrigger.create({
                 trigger: section,
-                start: "top 88%",      // triggers when section top enters bottom of viewport
-                end: "bottom 12%",    // triggers when section bottom leaves top of viewport
+                start: "top 88%",
+                once: true,
                 onEnter: () => {
-                    gsap.fromTo(section, 
-                        { opacity: 0, y: 50 }, 
-                        { opacity: 1, y: 0, duration: 0.85, ease: "power2.out", overwrite: "auto" }
-                    );
-                },
-                onLeave: () => {
-                    gsap.fromTo(section, 
-                        { opacity: 1, y: 0 }, 
-                        { opacity: 0, y: -50, duration: 0.65, ease: "power2.in", overwrite: "auto" }
-                    );
-                },
-                onEnterBack: () => {
-                    gsap.fromTo(section, 
-                        { opacity: 0, y: -50 }, 
-                        { opacity: 1, y: 0, duration: 0.85, ease: "power2.out", overwrite: "auto" }
-                    );
-                },
-                onLeaveBack: () => {
-                    gsap.fromTo(section, 
-                        { opacity: 1, y: 0 }, 
-                        { opacity: 0, y: 50, duration: 0.65, ease: "power2.in", overwrite: "auto" }
-                    );
+                    gsap.to(section, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.75,
+                        ease: "power2.out",
+                        clearProps: "transform,opacity",
+                        onComplete: () => {
+                            section.classList.add("active");
+                            section.classList.add("animate-active");
+                        }
+                    });
                 }
             });
         });

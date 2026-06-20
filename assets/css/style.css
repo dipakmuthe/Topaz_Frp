@@ -71,10 +71,20 @@ html {
     width: 100%;
     overflow-x: clip;
     scroll-padding-top: 96px;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE/Edge */
+}
+
+html::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari/Opera */
 }
 
 body {
     min-width: 320px;
+    overflow-x: hidden;
 }
 
 img,
@@ -323,16 +333,17 @@ h6 {
 }
 
 .navbar-brand-custom img {
-    height: 90px;
+    height: 68px !important;
     width: auto;
     object-fit: contain;
     transition: var(--transition-smooth);
-    margin: -10px 0;
+    margin: -2px 0;
 }
 
-.navbar-custom.scrolled .navbar-brand-custom img {
-    height: 70px;
-    margin: -5px 0;
+
+
+.navbar-custom .nav-item {
+    flex-shrink: 0 !important;
 }
 
 .navbar-custom .nav-link {
@@ -340,14 +351,15 @@ h6 {
     font-weight: 600;
     font-size: 0.95rem;
     color: var(--slate);
-    padding: 24px 15px !important;
+    padding: 16px 15px !important;
     position: relative;
     transition: var(--transition-smooth);
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
 }
 
-.navbar-custom.scrolled .nav-link {
-    padding: 18px 15px !important;
-}
+
 
 .navbar-custom .nav-link:hover,
 .navbar-custom .nav-link.active {
@@ -357,7 +369,7 @@ h6 {
 .navbar-custom .nav-link::after {
     content: '';
     position: absolute;
-    bottom: 8px;
+    bottom: 2px;
     left: 15px;
     right: 15px;
     height: 3px;
@@ -371,6 +383,21 @@ h6 {
 .navbar-custom .nav-link:hover::after,
 .navbar-custom .nav-link.active::after {
     transform: scaleX(1);
+}
+
+/* Responsive spacing for medium desktop screens to prevent overflow */
+@media (min-width: 992px) and (max-width: 1250px) {
+    .navbar-custom .nav-link {
+        padding: 8px 10px !important;
+        font-size: 0.88rem !important;
+    }
+
+
+
+    .navbar-custom .nav-link::after {
+        left: 10px !important;
+        right: 10px !important;
+    }
 }
 
 /* --- Mega Dropdown Menu --- */
@@ -2195,14 +2222,13 @@ header.py-5.bg-dark.text-white.position-relative p {
 .hero-fullscreen {
     position: relative;
     height: 85vh;
-    /* Reduced height as requested */
     min-height: 85vh;
     display: flex;
     align-items: center;
     overflow: hidden;
     background-color: var(--dark);
-    padding-top: 80px;
-    padding-bottom: 40px;
+    padding-top: 60px;
+    padding-bottom: 60px;
 }
 
 .hero-background-video {
@@ -2263,18 +2289,25 @@ header.py-5.bg-dark.text-white.position-relative p {
 .hero-heading {
     color: #FFFFFF !important;
     font-weight: 600 !important;
-    font-size: clamp(2.2rem, 4.2vw, 3.6rem) !important;
+    font-size: clamp(1.8rem, 3.2vw, 3rem) !important;
     letter-spacing: -1px;
-    line-height: 1.05;
+    line-height: 1.15;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
     margin-bottom: 20px;
-    min-height: 2.1em;
+    min-height: 2.3em;
     font-family: var(--font-heading);
+    white-space: normal;
 }
 
 .text-highlight-orange {
     color: #F26A21;
-    display: inline-block;
+    display: inline;
+}
+
+.typewriter-line {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .typewriter-cursor {
@@ -2282,6 +2315,8 @@ header.py-5.bg-dark.text-white.position-relative p {
     color: #F26A21;
     margin-left: 2px;
     animation: blinkCursor 0.8s step-end infinite;
+    display: inline;
+    white-space: nowrap;
 }
 
 @keyframes blinkCursor {
@@ -6192,7 +6227,7 @@ header.py-5.bg-dark.text-white.position-relative p {
     height: 100%;
     pointer-events: none;
     z-index: 2;
-    background-image: 
+    background-image:
         linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
     background-size: 20px 20px;
@@ -6208,10 +6243,33 @@ header.py-5.bg-dark.text-white.position-relative p {
     pointer-events: none;
 }
 
-.corner-tl { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
-.corner-tr { top: 10px; right: 10px; border-left: 0; border-bottom: 0; }
-.corner-bl { bottom: 10px; left: 10px; border-right: 0; border-top: 0; }
-.corner-br { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
+.corner-tl {
+    top: 10px;
+    left: 10px;
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.corner-tr {
+    top: 10px;
+    right: 10px;
+    border-left: 0;
+    border-bottom: 0;
+}
+
+.corner-bl {
+    bottom: 10px;
+    left: 10px;
+    border-right: 0;
+    border-top: 0;
+}
+
+.corner-br {
+    bottom: 10px;
+    right: 10px;
+    border-left: 0;
+    border-top: 0;
+}
 
 /* Laser Scan Line */
 .scanner-scan-line {
@@ -6232,12 +6290,15 @@ header.py-5.bg-dark.text-white.position-relative p {
         top: 0%;
         opacity: 0;
     }
+
     10% {
         opacity: 1;
     }
+
     90% {
         opacity: 1;
     }
+
     100% {
         top: 100%;
         opacity: 0;
@@ -6281,8 +6342,17 @@ header.py-5.bg-dark.text-white.position-relative p {
 }
 
 @keyframes dotPulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.4); opacity: 0.6; }
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.4);
+        opacity: 0.6;
+    }
 }
 
 .scanner-stats {
@@ -6303,7 +6373,7 @@ header.py-5.bg-dark.text-white.position-relative p {
     overflow: hidden;
     background: #0B1635;
     border: 12px solid #1E293B;
-    box-shadow: 
+    box-shadow:
         0 10px 30px rgba(0, 0, 0, 0.15),
         0 1px 3px rgba(0, 0, 0, 0.1),
         inset 0 0 15px rgba(0, 0, 0, 0.5);
@@ -6314,7 +6384,7 @@ header.py-5.bg-dark.text-white.position-relative p {
 
 .modern-certificate-frame:hover {
     transform: translateY(-8px) rotateY(-3deg) rotateX(3deg);
-    box-shadow: 
+    box-shadow:
         0 20px 40px rgba(0, 0, 0, 0.25),
         0 15px 15px rgba(0, 0, 0, 0.15),
         inset 0 0 20px rgba(0, 0, 0, 0.4);
@@ -6359,10 +6429,25 @@ header.py-5.bg-dark.text-white.position-relative p {
     z-index: 6;
 }
 
-.screw-tl { top: -8px; left: -8px; }
-.screw-tr { top: -8px; right: -8px; }
-.screw-bl { bottom: -8px; left: -8px; }
-.screw-br { bottom: -8px; right: -8px; }
+.screw-tl {
+    top: -8px;
+    left: -8px;
+}
+
+.screw-tr {
+    top: -8px;
+    right: -8px;
+}
+
+.screw-bl {
+    bottom: -8px;
+    left: -8px;
+}
+
+.screw-br {
+    bottom: -8px;
+    right: -8px;
+}
 
 /* 4. Certificate Spec Table */
 .certificate-spec-table {
@@ -6429,4 +6514,322 @@ header.py-5.bg-dark.text-white.position-relative p {
     background-color: var(--primary-light);
     color: var(--primary);
     border: 1px solid rgba(242, 106, 33, 0.2);
+}
+
+/* ==========================================================================
+   TOPAZ FRP - RESPONSIVENESS AUDIT & MOBILE MENU REMASTER
+   ========================================================================== */
+
+/* 1. Global Scroll Stability & Layout Cleanup */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden !important;
+}
+
+body.mobile-menu-active {
+    overflow: hidden !important;
+}
+
+/* Global Image Responsiveness */
+img {
+    max-width: 100%;
+    height: auto !important;
+    display: block;
+}
+
+/* 2. Fluid Typography System */
+h1,
+.display-3,
+.hero-heading {
+    font-size: clamp(2rem, 6vw, 4.5rem) !important;
+}
+
+h2,
+.section-title {
+    font-size: clamp(1.5rem, 4vw, 2.75rem) !important;
+}
+
+body {
+    font-size: clamp(0.95rem, 0.5vw + 0.8rem, 1.1rem);
+}
+
+.btn-primary-custom,
+.btn-secondary-custom,
+.btn-white-custom,
+.btn-request-quote {
+    font-size: clamp(0.9rem, 1.8vw, 1rem) !important;
+}
+
+/* 3. Mobile Navbar & Premium Menu System */
+@media (max-width: 991.98px) {
+
+    /* Brand logo scaling */
+    .navbar-brand-custom img {
+        height: 45px !important;
+        margin: -3px 0 !important;
+    }
+
+    .navbar-custom {
+        padding: 8px 0 !important;
+    }
+
+
+
+    /* Toggler button optimization */
+    .navbar-toggler {
+        border: none !important;
+        padding: 8px !important;
+        background: transparent !important;
+        transition: var(--transition-smooth);
+    }
+
+    .navbar-toggler:focus {
+        box-shadow: none !important;
+        outline: none !important;
+    }
+
+    /* Premium Hamburger Icon SVG custom rendering */
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(11, 22, 53, 0.85)' stroke-width='2.5' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        transition: background-image 0.3s ease;
+    }
+
+    /* Toggle to 'X' close icon when menu is active */
+    .navbar-custom.menu-open .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(242, 106, 33, 1)' stroke-width='2.5' stroke-linecap='round' stroke-miterlimit='10' d='M6 6l18 18M6 24L24 6'/%3e%3c/svg%3e") !important;
+    }
+
+    /* Dark Backdrop Overlay layer */
+    .navbar-custom::after {
+        content: '';
+        position: fixed;
+        top: 76px;
+        /* below mobile menu header */
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(11, 22, 53, 0.65);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.35s ease, visibility 0.35s ease;
+        z-index: 998;
+        pointer-events: none;
+    }
+
+
+
+    .navbar-custom.menu-open::after {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    /* Premium Slide-Down Menu Overlay */
+    .navbar-collapse {
+        position: fixed;
+        top: 76px;
+        left: 0;
+        width: 100%;
+        background-color: #0B1635 !important;
+        /* Premium Dark Navy */
+        padding: 20px 0 !important;
+        z-index: 999;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 4px solid var(--primary);
+        max-height: calc(100vh - 76px);
+        overflow-y: auto !important;
+        display: block !important;
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-15px);
+        transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.35s;
+    }
+
+
+
+    .navbar-collapse.show {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Menu Navigation Links */
+    .navbar-collapse .navbar-nav {
+        margin: 0 !important;
+        padding: 0 20px !important;
+        width: 100%;
+    }
+
+    .navbar-collapse .nav-item {
+        width: 100%;
+        margin-bottom: 6px;
+    }
+
+    .navbar-collapse .nav-link {
+        color: #FFFFFF !important;
+        font-size: 1.05rem !important;
+        font-weight: 600 !important;
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 12px 20px !important;
+        border-radius: 8px;
+        border-bottom: none !important;
+        transition: var(--transition-smooth);
+    }
+
+    .navbar-collapse .nav-link:hover,
+    .navbar-collapse .nav-link.active {
+        background-color: rgba(242, 106, 33, 0.12) !important;
+        color: var(--primary) !important;
+        transform: translateY(-2px);
+    }
+
+    /* Mega Dropdown Mobile Custom Styling */
+    .dropdown-mega-menu {
+        position: relative !important;
+        background-color: rgba(255, 255, 255, 0.03) !important;
+        border-left: 3px solid var(--primary) !important;
+        padding: 15px !important;
+        border-radius: 8px;
+        margin-top: 5px;
+        display: none !important;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease;
+    }
+
+    .dropdown-mega-menu.show {
+        display: block !important;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .mega-menu-title {
+        color: rgba(255, 255, 255, 0.8) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        font-size: 0.85rem !important;
+        font-weight: 700 !important;
+        margin-top: 15px !important;
+        margin-bottom: 10px !important;
+        padding-bottom: 5px !important;
+    }
+
+    .mega-menu-list {
+        padding-left: 0 !important;
+    }
+
+    .mega-menu-list a {
+        color: rgba(255, 255, 255, 0.7) !important;
+        font-size: 0.9rem !important;
+        padding: 8px 0 !important;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mega-menu-list a:hover {
+        color: var(--primary) !important;
+        padding-left: 0 !important;
+        background-color: transparent !important;
+    }
+
+    .mega-menu-list a i {
+        display: none;
+        /* Hide chevron icons inside list items on mobile to save space */
+    }
+}
+
+/* 4. Global Section/Grid Fixes */
+@media (max-width: 991.98px) {
+
+    /* Stack content vertically in hero */
+    .hero-fullscreen {
+        height: auto !important;
+        min-height: calc(100vh - 76px) !important;
+        padding-top: 40px !important;
+        padding-bottom: 80px !important;
+    }
+
+    .hero-container {
+        padding-top: 20px !important;
+    }
+
+    .hero-heading {
+        text-align: center !important;
+    }
+
+    .hero-subtitle {
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .hero-trust-indicators {
+        justify-content: center !important;
+    }
+
+    .hero-ctas {
+        text-align: center !important;
+    }
+
+    .hero-right-showcase {
+        margin-top: 30px !important;
+    }
+
+    /* Adjust general grid spacing */
+    .section-padding {
+        padding: 40px 0 !important;
+    }
+
+    .section-title {
+        font-size: clamp(1.8rem, 5vw, 2.5rem) !important;
+    }
+
+    /* Fix comparison table scroll overflow */
+    .table-comparison-container,
+    .table-spec-container {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Double check standard bootstrap fallback for grids */
+    .row>[class*="col-"] {
+        margin-bottom: 20px;
+    }
+
+    .row>[class*="col-"]:last-child {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 576px) {
+
+    /* Fluid adjustments for very small mobile screens */
+    .trust-card.glass-card {
+        flex: 1 1 100% !important;
+    }
+
+    .floating-btn-group {
+        right: 15px !important;
+        bottom: 15px !important;
+    }
+
+    .floating-btn {
+        width: 46px !important;
+        height: 46px !important;
+        font-size: 1.3rem !important;
+    }
+}
+
+/* --- Footer Logo Scaling --- */
+.footer-custom img[src*="logo.png"] {
+    height: 70px !important;
 }
